@@ -1,8 +1,9 @@
 package com.karumi.ui.presenter
 
+import arrow.core.Either
 import co.metalab.asyncawait.async
 import com.karumi.common.weak
-import com.karumi.domain.model.SuperHero
+import com.karumi.domain.model.*
 import com.karumi.domain.usecase.GetSuperHeroByName
 import com.karumi.ui.LifecycleSubscriber
 
@@ -31,7 +32,15 @@ class SuperHeroDetailPresenter(
     private fun refreshSuperHeroes() = async {
         val result = await { getSuperHeroByName(name) }
         view?.hideLoading()
-        view?.showSuperHero(result)
+        when(result){
+            is Either.Right -> view?.showSuperHero(result.b)
+            is Either.Left ->
+                when(result.a){
+                is SuperHeroNotFound -> view?.showSuperHeroNotFound()
+                is NoInternetConnection -> view?.showNoInternetConnection()
+
+            }
+        }
     }
 
     interface View {
@@ -39,6 +48,8 @@ class SuperHeroDetailPresenter(
         fun showLoading()
         fun hideLoading()
         fun showSuperHero(superHero: SuperHero)
+        fun showNoInternetConnection()
+        fun showSuperHeroNotFound()
     }
 
 }

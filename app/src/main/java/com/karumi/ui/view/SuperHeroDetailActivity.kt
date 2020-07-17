@@ -57,6 +57,21 @@ class SuperHeroDetailActivity : BaseActivity(), SuperHeroDetailPresenter.View {
         iv_super_hero_photo.setImageBackground(superHero.photo)
     }
 
+
+    override fun showNoInternetConnection(){
+        tv_super_hero_name.visibility = View.GONE
+        tv_super_hero_description.visibility = View.GONE
+        iv_avengers_badge.visibility =View.GONE
+        tv_empty_case.text = "No Internet Connection"
+
+    }
+    override fun showSuperHeroNotFound(){
+        tv_super_hero_name.visibility = View.GONE
+        tv_super_hero_description.visibility = View.GONE
+        iv_avengers_badge.visibility =View.GONE
+        tv_empty_case.text = "Super Hero Not Found"
+    }
+
     override val activityModules = Module(allowSilentOverride = true) {
         bind<SuperHeroDetailPresenter>() with provider {
             SuperHeroDetailPresenter(this@SuperHeroDetailActivity, instance())

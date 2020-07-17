@@ -39,6 +39,8 @@ dependencies {
     compile 'co.metalab.asyncawait:asyncawait:1.0.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'org.funktionale:funktionale-either:1.1'
+    compile group: 'io.arrow-kt', name: 'arrow-core', version: '0.6.1'
+
 
     testImplementation 'junit:junit:4.12'
 

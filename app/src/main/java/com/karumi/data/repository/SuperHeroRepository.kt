@@ -1,6 +1,9 @@
 package com.karumi.data.repository
 
 import android.util.Log
+import arrow.core.Either
+import arrow.core.Right
+import com.karumi.domain.model.Errors
 import com.karumi.domain.model.SuperHero
 
 class SuperHeroRepository {
@@ -20,9 +23,9 @@ class SuperHeroRepository {
         return superHeroes
     }
 
-    fun getByName(name: String): SuperHero {
+    fun getByName(name: String): Either<Errors, SuperHero> {
         waitABit()
-        return superHeroes.first { it.name == name }
+        return Right(superHeroes.first { it.name == name })
     }
 
     private fun waitABit() {

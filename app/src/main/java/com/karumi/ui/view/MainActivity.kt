@@ -53,7 +53,7 @@ class MainActivity : BaseActivity(), SuperHeroesPresenter.View {
 
     override fun showSuperHeroes(superHeroes: List<SuperHero>) {
         adapter.clear()
-        adapter.addAll(superHeroes)
+//        adapter.addAll(superHeroes)
         adapter.notifyDataSetChanged()
     }
 
